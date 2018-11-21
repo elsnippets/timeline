@@ -5,8 +5,9 @@
 /* The actual timeline (the vertical ruler) */
 .timeline {
     position: relative;
-    width: 80%;
+    width: 95%;
     margin: 0 auto;
+    max-width: 1920px;
     padding: 2em 0;
 }
 
@@ -20,26 +21,23 @@
     position: absolute;
     top: 0;
     width: 4px;
-    left: 40px;
+    left: 25px;
 }
 
 /* Container around content */
-.container {
+.timeline>div {
     box-sizing: border-box;
     position: relative;
     width: 100%;
-    padding: 10px 20px;
-    padding-left: 60px;
-    padding-right: 5px;
+    padding: 15px 20px 50px 70px;
 }
 
 /* The circles on the timeline */
-.container::after {
+.timeline>div::after {
     content: '';
     position: absolute;
-    width: 35px;
-    height: 35px;
-    right: -18px;
+    width: 25px;
+    height: 25px;
     background-color: #fff;
     border: 4px solid #FBBA00;
     top: 15px;
@@ -47,26 +45,21 @@
     z-index: 1;
 }
 
- /* Place containers to the right */
-.left {
-    left: 0;
+/* Make all containers behave like the left ones */
+.left,
+.right {
+    left: -5px;
 }
 
 /* Make sure all circles are at the same spot */
 .right::after,
 .left::after {
-    left: 15px;
-}
-
-
-/* Make all right containers behave like the left ones */
-.right {
-    left: 0;
+    left: 10px;
 }
 
 /* The actual content */
-.content {
-    padding: 10px;
+.tm-content {
+    padding: 30px 10px;
     position: relative;
     background-color: #fff;
     border-radius: 28px;
@@ -76,22 +69,134 @@
     flex-direction: column;
 }
 
-.container::before {
+.timeline>div::before {
     left: 60px;
 }
 
+.tm-content>div {
+    width: 90%;
+    overflow: visible;
+}
+
+.tm-content>img {
+    width: 55%;
+}
+
+/*List*/
+.tm-content ul {
+    position: relative;
+    list-style: none;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    padding-left: 5px;
+    margin-top: 30px;
+}
+
+
+.tm-content ul li {
+    margin-top: 10px;
+    margin-left: 10px;
+    position: relative;
+    font-size: 1.2em;
+    line-height: normal;
+}
+
+.tm-content ul li::before {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    top: 8px;
+    left: -18px;
+    border-radius: 10px;
+    background-color: #FBBA00;
+}
+
+.tm-content h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2.5em;
+    margin-left: 15px;
+}
+
+
 @media screen and (min-width: 768px) {
-    .content {
-        flex-direction: row;
-        flex-wrap: wrap;
-        padding: 15px;
-        justify-content: space-between;
+    .timeline {
+        width: 90%;
     }
 
-    .container {
+    .timeline>div {
         width: 100%;
         padding-left: 70px;
         padding-right: 25px;
+    }
+
+    .timeline>div::after {
+        width: 35px;
+        height: 35px;
+
+    }
+
+    .tm-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 30px 20px;
+        justify-content: space-between;
+    }
+
+    .tm-content ul {
+        padding-left: 25px;
+    }
+
+    .tm-content>div {
+        width: 65%;
+    }
+
+    .tm-content>img {
+        width: 35%;
+    }
+
+    /* Make all containers behave like the left ones */
+    .left,
+    .right {
+        left: -10px;
+    }
+
+    /* Make sure all circles are at the same spot */
+    .right::after,
+    .left::after {
+        left: 10px;
+    }
+}
+
+
+@media screen and (min-width: 960px) {
+    .timeline {
+        width: 80%;
+    }
+
+    .tm-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 30px 30px;
+        justify-content: space-between;
+    }
+
+    .tm-content ul {
+        padding-left: 15px;
+    }
+
+    .tm-content>div {
+        width: 65%;
+    }
+
+    .tm-content>img {
+        width: 30%;
+    }
+
+    .timeline>div {
+        width: 50%;
+        padding: 20px 40px;
     }
 
     .timeline::after {
@@ -103,23 +208,19 @@
         left: 50%;
     }
 
-/* Place containers to the left */
+    /* Place containers to the left */
     .left {
         left: 0;
     }
 
-/* Fix the circles for containers on the left side */
+    /* Fix the circles for containers on the left side */
     .right::after {
         left: -25px;
     }
 
-/* Fix the circles for containers on the right side */
+    /* Fix the circles for containers on the right side */
     .left::after {
-				left: auto;
-    }
-
-    .container {
-        padding: 20px 40px;
-        width: 50%;
+        left: auto;
+        right: -20px;
     }
 }
